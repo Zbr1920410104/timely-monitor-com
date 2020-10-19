@@ -2,17 +2,29 @@ import React, { useEffect, useState } from 'react';
 
 // 请求
 import proxyFetch from '@/util/request';
-import { GET_ALL_USERS, CREATE_NEW_ACCOUNT } from '@/constants/api-constants';
+import { GET_ALL_USERS } from '@/constants/api-constants';
+
+// redux
+import { useDispatch } from 'react-redux';
+import userAction from '@/redux/action/user';
+
+// 组件
+import ModifyAccountContent from '@/components/home/admin/Modify-account-content-controller.jsx';
+import CreateAccountContent from '@/components/home/admin/Create-account-content-controller.jsx';
 
 // 样式
 import '@/style/home/admin/home-account.styl';
-import { Table, Button } from 'antd';
-const { Column } = Table;
+import { Table, Button, Modal } from 'antd';
+const { Column } = Table,
+  { confirm } = Modal;
 
 export default (porps) => {
   const [accountLoading, setAccountLoading] = useState(false),
     [accountList, setAccountList] = useState([]),
-    [isNeedRefresh, setIsNeedRefresh] = useState(true);
+    [isNeedRefresh, setIsNeedRefresh] = useState(true),
+    [newAccountVisible, setNewAccountVisible] = useState(false),
+    [modifyAccountVisible, setModifyAccountVisible] = useState(false),
+    dispatch = useDispatch();
 
   useEffect(() => {
     let _isMounted = true;
@@ -33,21 +45,23 @@ export default (porps) => {
     })();
   }, [isNeedRefresh]);
 
-  const expandedRowRender = (record) => {
-    if (record?.publicKey)
-      return (
-        <div className='table-inner-info-box'>公钥: {record.publicKey}</div>
-      );
-    else {
-      return <div></div>;
-    }
+  const showNewAccountModal = () => {
+    setNewAccountVisible(true);
   };
 
-  const createKeyPair = async () => {
-    const res = await proxyFetch(CREATE_NEW_ACCOUNT);
-    if (res) {
-      setIsNeedRefresh(true);
-    }
+  const hideNewAccountModal = () => {
+    dispatch(userAction.setAccountRefresh(true));
+    setNewAccountVisible(false);
+  };
+
+  const showModifyAccountModal = (uuid) => {
+    dispatch(userAction.setAccountUuid(uuid));
+    setModifyAccountVisible(true);
+  };
+
+  const hideModifyAccountModal = () => {
+    dispatch(userAction.setAccountUuid(''));
+    setModifyAccountVisible(false);
   };
 
   return (
@@ -56,15 +70,59 @@ export default (porps) => {
         <span>账号管理</span>
       </p>
       <div className='home-account-content-box'>
+        <Modal
+          title='新增账号'
+          visible={newAccountVisible}
+          onCancel={() => {
+            confirm({
+              title: '确认离开?',
+              okType: 'primary',
+              content: '离开填写内容将不会保存!',
+              okText: '确认',
+              cancelText: '取消',
+              onOk() {
+                hideNewAccountModal();
+              },
+              onCancel() {},
+            });
+          }}
+          footer={null}
+          okText='确定'
+          cancelText='取消'
+        >
+          <CreateAccountContent />
+        </Modal>
+        <Modal
+          title='修改账号'
+          visible={modifyAccountVisible}
+          footer={null}
+          onCancel={() => {
+            confirm({
+              title: '确认离开?',
+              okType: 'primary',
+              content: '离开修改内容将不会保存!',
+              okText: '确认',
+              cancelText: '取消',
+              onOk() {
+                hideModifyAccountModal();
+              },
+              onCancel() {},
+            });
+          }}
+          okText='确定'
+          cancelText='取消'
+        >
+          <ModifyAccountContent />
+        </Modal>
         <div className='list-title-box'>
           <Button
             className='button'
             type='primary'
             size='large'
             style={{ marginBottom: 16 }}
-            onClick={createKeyPair}
+            onClick={showNewAccountModal}
           >
-            新增ECC密钥对
+            新增账户
           </Button>
         </div>
         <Table
@@ -73,7 +131,6 @@ export default (porps) => {
           loading={accountLoading}
           rowKey={(record) => record.uuid}
           scroll={{ x: 900 }}
-          expandedRowRender={expandedRowRender}
         >
           <Column
             align='center'
@@ -81,24 +138,36 @@ export default (porps) => {
             dataIndex='role'
             key=''
             fixed='left'
-            render={() => '普通节点'}
+            render={(text) => {
+              return text === 1 ? '超级管理员' : '监测员';
+            }}
           />
+          <Column align='center' title='账户' dataIndex='userName' key='' />
           <Column
             align='center'
-            title='公钥(前20位)'
-            dataIndex='publicKey'
+            title='修改信息'
+            dataIndex=''
             key=''
-            render={(text) => {
-              return text.slice(0, 20);
+            render={(text, record) => {
+              return (
+                <Button
+                  type='link'
+                  onClick={() => {
+                    showModifyAccountModal(record.uuid);
+                  }}
+                >
+                  修改信息
+                </Button>
+              );
             }}
           />
           <Column
             align='center'
-            title='私钥(前20位)'
-            dataIndex='privateKey'
+            title='删除账户'
+            dataIndex=''
             key=''
-            render={(text) => {
-              return text.slice(0, 20);
+            render={() => {
+              return <Button type='link'>删除账户</Button>;
             }}
           />
         </Table>

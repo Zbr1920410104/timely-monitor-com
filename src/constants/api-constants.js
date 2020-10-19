@@ -6,27 +6,16 @@ export const UPLOAD_TO_QiNiu = 'https://upload-z2.qiniup.com'; // 上传七牛
  * 用户
  **/
 export const GET_USER_TOKEN = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getUserToken`; // 登录
-export const GET_USER_NAME = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getUserName`; // 登录
+export const GET_USER_NAME = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getUserName`;
+// 登录
 export const GET_MY_INFO = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getMyInfo`;
 export const SAVE_PASSWORD = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/savePassword`;
 export const GET_ALL_USERS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER}/getAllUsers`;
 
-/**
- * 区块链
- **/
-export const GET_ALL_BLOCKS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_BLOCK}/getAllBlocks`;
-export const CREATE_GENESIS_BLOCK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_CHAIN}/createGenesisBlock`;
-export const GET_DIFFICULTY = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_CHAIN}/getDifficulty`;
-/**
- * 区块
- **/
-export const MINE_TO_CREATE_NEW_BLOCK = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_BLOCK}/mineToCreateNewBlock`;
-/**
- * 交易
- */
-export const GET_ALL_TRANSACTIONS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_TRANSACTION}/getAllTransactions`;
-export const CREATE_NEW_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_TRANSACTION}/createNewAccount`;
-export const CREATE_NEW_TRANSACTION = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_TRANSACTION}/createNewTransaction`;
+// 管理员
+export const CREATE_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/createAccount`;
+export const UPDATE_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/updateAccount`;
+export const SELECT_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/selectAccount`;
 
 // export const QUARY_DEPARTMENT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/quaryDepartment`;
 // export const SAVE_DEPARTMENT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/saveDepartment`;

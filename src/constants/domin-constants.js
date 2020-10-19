@@ -13,10 +13,7 @@ export const DOMAIN = _DOMAIN[SAP_CONTROL];
 // 模块
 export const PART = {
   OPT_USER: '/user',
-  OPT_BLOCK: '/block',
-  OPT_TRANSACTION: '/transaction',
-  OPT_CHAIN: '/chain',
-  OPT_COMMOM_POINT: '/commonPoint',
+  OPT_ADMIN: '/admin',
 };
 
 // 返回码

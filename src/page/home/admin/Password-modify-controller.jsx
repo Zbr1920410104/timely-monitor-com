@@ -1,7 +1,7 @@
 import React from 'react';
 
 // 路由
-import { HOME_BLOCK, INDEX } from '@/constants/route-constants';
+import { HOME_MONITOR, INDEX } from '@/constants/route-constants';
 import { useHistory } from 'react-router-dom';
 
 // 请求
@@ -46,7 +46,7 @@ export default (props) => {
       if (userName && values.password) {
         dispatch(userAction.asyncSetUser(values));
       }
-      history.push(HOME_BLOCK.path);
+      history.push(HOME_MONITOR.path);
     }
   };
 

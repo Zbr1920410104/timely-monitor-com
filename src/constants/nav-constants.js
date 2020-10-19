@@ -7,7 +7,7 @@ export const NAV = {
     {
       key: 'manager',
       path: ROUTE.HOME_INDEX.path,
-      icon: 'audit',
+      icon: 'bank',
       name: '首页',
     },
     {
@@ -17,18 +17,6 @@ export const NAV = {
       icon: 'key',
     },
     {
-      key: 'block',
-      path: ROUTE.HOME_BLOCK.path,
-      name: '区块查看',
-      icon: 'solution',
-    },
-    {
-      key: 'transaction',
-      path: ROUTE.HOME_TRANSACTION.path,
-      icon: 'apartment',
-      name: '交易查看',
-    },
-    {
       key: 'account',
       path: ROUTE.HOME_ACCOUNT.path,
       icon: 'apartment',
@@ -36,7 +24,7 @@ export const NAV = {
     },
   ],
   /* 普通节点 */
-  [AUTHORITY.COMMOM_POINT.code]: [
+  [AUTHORITY.MONITOR.code]: [
     {
       key: 'manager',
       path: ROUTE.HOME_INDEX.path,
@@ -44,28 +32,22 @@ export const NAV = {
       icon: 'bank',
     },
     {
-      key: 'mine',
-      path: ROUTE.HOME_MINE.path,
-      icon: 'apartment',
-      name: '账户与挖矿',
+      key: 'password',
+      path: ROUTE.HOME_PASSWORD.path,
+      name: '修改密码',
+      icon: 'key',
     },
     {
-      key: 'block',
-      path: ROUTE.HOME_BLOCK.path,
-      name: '区块查看',
-      icon: 'solution',
+      key: 'monitor',
+      path: ROUTE.HOME_MONITOR.path,
+      name: '图片监控',
+      icon: 'monitor',
     },
     {
-      key: 'transaction',
-      path: ROUTE.HOME_TRANSACTION.path,
-      icon: 'apartment',
-      name: '交易查看',
-    },
-    {
-      key: 'accountTransaction',
-      path: ROUTE.HOME_ACCOUNT_TRANSACTION.path,
-      icon: 'apartment',
-      name: '账户交易',
+      key: 'monitorList',
+      path: ROUTE.HOME_MONITOR_LIST.path,
+      name: '监控列表',
+      icon: 'bars',
     },
   ],
 };

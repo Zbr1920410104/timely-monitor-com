@@ -24,9 +24,7 @@ export default (props) => {
     dispatch = useDispatch();
 
   const onFinish = (values) => {
-    if (values.userName === 'admin') {
-      values.password = md5(values.password);
-    }
+    values.password = md5(values.password);
     // 使用redux-saga
     dispatch(userAction.asyncSetUser(values));
     if (token) {

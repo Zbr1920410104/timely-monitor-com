@@ -16,9 +16,9 @@ import { LOCAL_STORAGE } from '@/constants/app-constants';
 import {
   HOME_INDEX,
   HOME_PASSWORD,
-  HOME_BLOCK,
   INDEX,
-  HOME_MINE,
+  HOME_ACCOUNT,
+  HOME_MONITOR,
 } from '@/constants/route-constants';
 import md5 from 'md5';
 
@@ -43,10 +43,10 @@ const effects = {
             if (res.userInfo.password === md5('123456')) {
               return HOME_PASSWORD.path;
             } else {
-              return HOME_BLOCK.path;
+              return HOME_ACCOUNT.path;
             }
           case 5:
-            return HOME_MINE.path;
+            return HOME_MONITOR.path;
           default:
             return HOME_INDEX.path;
         }

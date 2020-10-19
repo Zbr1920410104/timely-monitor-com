@@ -2,7 +2,7 @@ import React from 'react';
 import '@/style/index.styl';
 
 // 样式
-import { Icon } from 'antd';
+import { DesktopOutlined } from '@ant-design/icons';
 
 // 组件
 import LoginComponent from '@/components/index/Login.jsx';
@@ -24,8 +24,8 @@ export default (props) => {
         </div>
         <div className='right-box'>
           <h1 className='logo'>
-            <Icon type='reconciliation' />
-            <span>OCR监测系统</span>
+            <DesktopOutlined />
+            <span>{'  '}OCR监测系统</span>
           </h1>
           <div className='form'>
             <LoginComponent />

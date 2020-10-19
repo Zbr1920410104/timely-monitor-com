@@ -11,11 +11,9 @@ import * as ROUTES from '@/constants/route-constants';
 // controller
 import HomeIndexController from '@/page/home/Home-index-controller.jsx';
 import PasswordModifyController from '@/page/home/admin/Password-modify-controller.jsx';
-import HomeTransactionController from '@/page/home/public/Home-transaction-controller.jsx';
-import HomeBlockController from '@/page/home/public/Home-block-controller.jsx';
 import HomeAccountController from '@/page/home/admin/Home-account-controller.jsx';
-import HomeMineController from '@/page/home/commonPoint/Home-mine-controller.jsx';
-import HomeAccountTransactionController from '@/page/home/commonPoint/Home-account-transaction-controller.jsx';
+import HomeMonitorController from '@/page/home/monitor/Home-monitor-controller.jsx';
+import HomeMonitorListController from '@/page/home/monitor/Home-monitor-list-controller.jsx';
 
 // localStorage
 import { LOCAL_STORAGE } from '@/constants/app-constants';
@@ -31,7 +29,7 @@ const { Header, Content, Footer, Sider } = Layout;
 export default (props) => {
   const token = localStorage.getItem(`${LOCAL_STORAGE}-token`);
   // 各个路由控制
-  const { uuid, name, role } = useSelector((state) => state.userStore),
+  const { uuid, userName, role } = useSelector((state) => state.userStore),
     history = useHistory(),
     dispatch = useDispatch();
 
@@ -56,14 +54,6 @@ export default (props) => {
   });
 
   // 管理员
-  const homeTransaction = useRouteMatch({
-    path: ROUTES.HOME_TRANSACTION.path,
-    exact: true,
-  });
-  const homeBlock = useRouteMatch({
-    path: ROUTES.HOME_BLOCK.path,
-    exact: true,
-  });
   const homeAccount = useRouteMatch({
     path: ROUTES.HOME_ACCOUNT.path,
     exact: true,
@@ -72,12 +62,14 @@ export default (props) => {
     path: ROUTES.HOME_PASSWORD.path,
     exact: true,
   });
-  const homeMine = useRouteMatch({
-    path: ROUTES.HOME_MINE.path,
+
+  // 监测员
+  const homeMonitor = useRouteMatch({
+    path: ROUTES.HOME_MONITOR.path,
     exact: true,
   });
-  const homeAccountTransaction = useRouteMatch({
-    path: ROUTES.HOME_ACCOUNT_TRANSACTION.path,
+  const homeMonitorList = useRouteMatch({
+    path: ROUTES.HOME_MONITOR_LIST.path,
     exact: true,
   });
 
@@ -86,7 +78,7 @@ export default (props) => {
       case 1:
         return '超级管理员';
       case 5:
-        return '普通节点';
+        return '监测员';
       default:
         return '未知';
     }
@@ -99,16 +91,12 @@ export default (props) => {
     content = <HomeIndexController />;
   } else if (homePassword) {
     content = <PasswordModifyController />;
-  } else if (homeTransaction) {
-    content = <HomeTransactionController />;
-  } else if (homeBlock) {
-    content = <HomeBlockController />;
   } else if (homeAccount) {
     content = <HomeAccountController />;
-  } else if (homeMine) {
-    content = <HomeMineController />;
-  } else if (homeAccountTransaction) {
-    content = <HomeAccountTransactionController />;
+  } else if (homeMonitor) {
+    content = <HomeMonitorController />;
+  } else if (homeMonitorList) {
+    content = <HomeMonitorListController />;
   }
 
   return (
@@ -116,11 +104,11 @@ export default (props) => {
       <Sider className='home-sider'>
         <div className='logo'>
           <Icon type='reconciliation' />
-          <span>BrCoin账户系统</span>
+          <span>OCR实时监测系统</span>
         </div>
         <div className='user-info'>
           <span>
-            欢迎:{name}({roleToText(role)})
+            欢迎:{userName}({roleToText(role)})
           </span>
         </div>
         <Nav />

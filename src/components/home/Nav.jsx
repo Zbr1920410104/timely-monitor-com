@@ -13,6 +13,13 @@ import md5 from 'md5';
 
 // 样式
 import { Menu, Icon, Spin, message } from 'antd';
+import {
+  BankOutlined,
+  KeyOutlined,
+  TeamOutlined,
+  MonitorOutlined,
+  BarsOutlined,
+} from '@ant-design/icons';
 
 export default (props) => {
   const { role, userLoading, password } = useSelector(
@@ -28,6 +35,23 @@ export default (props) => {
       setNavEnabled(true);
     }
   }, [password]);
+
+  const typeToIcon = (type) => {
+    switch (type) {
+      case 'bank':
+        return <BankOutlined />;
+      case 'key':
+        return <KeyOutlined />;
+      case 'apartment':
+        return <TeamOutlined />;
+      case 'monitor':
+        return <MonitorOutlined />;
+      case 'bars':
+        return <BarsOutlined />;
+      default:
+        return;
+    }
+  };
 
   // 渲染nav 用 NAV[role];
   // nav loading用userLoading
@@ -54,7 +78,7 @@ export default (props) => {
               }}
             >
               <Link to={oneLevelNav.path}>
-                <Icon type={oneLevelNav.icon} />
+                {typeToIcon(oneLevelNav.icon)}
                 {oneLevelNav.name}
               </Link>
             </Menu.Item>

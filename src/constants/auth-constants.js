@@ -4,7 +4,7 @@ export const AUTHORITY = {
     name: '管理员',
     code: 1,
   },
-  COMMOM_POINT: {
+  MONITOR: {
     name: '普通节点',
     code: 5,
   },

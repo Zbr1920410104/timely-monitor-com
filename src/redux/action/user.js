@@ -8,6 +8,8 @@ export default {
   setUserLoading: createAction('setUserLoading'),
   setModifyPassword: createAction('setModifyPassword'),
   setAddAccount: createAction('setAddAccount'),
+  setChangeAccount: createAction('setChangeAccount'),
   setAccountUuid: createAction('setAccountUuid'),
+  setAccountRefresh: createAction('setAccountRefresh'),
   // 普通员工填写
 };

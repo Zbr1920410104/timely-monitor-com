@@ -7,11 +7,8 @@ export default handleActions(
       return {
         ...state,
         userName: result.userName,
-        name: result.name,
         role: result.role,
-        publicKey: result.publicKey,
-        privateKey: result.privateKey,
-        amount: result.amount,
+        uuid: result.uuid,
         password: result.password,
       };
     },
@@ -40,25 +37,38 @@ export default handleActions(
         addAccount: result,
       };
     },
-    // setAccountUuid(state, { payload: result }) {
-    //   return {
-    //     ...state,
-    //     accountUuid: result,
-    //   };
-    // },
+    setChangeAccount(state, { payload: result }) {
+      return {
+        ...state,
+        changeAccount: result,
+      };
+    },
+    setAccountUuid(state, { payload: result }) {
+      return {
+        ...state,
+        accountUuid: result,
+      };
+    },
+    setAccountRefresh(state, { payload: result }) {
+      return {
+        ...state,
+        accountRefresh: result,
+      };
+    },
   },
   {
     loginLoading: false,
     userLoading: false,
     modifyPassword: false,
     addAccount: false,
+    accountRefresh: false,
+    changeAccount: false,
+    addUuid: '',
     uuid: '',
     userName: '',
     phone: '',
     name: '',
     amount: 0,
-    publicKey: '',
-    privateKey: '',
     role: 0,
     password: '',
   }
