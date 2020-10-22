@@ -49,5 +49,11 @@ export const NAV = {
       name: '监控列表',
       icon: 'bars',
     },
+    {
+      key: 'monitorText',
+      path: ROUTE.HOME_MONITOR_TEXT.path,
+      name: '黑名单设置',
+      icon: 'profile',
+    },
   ],
 };

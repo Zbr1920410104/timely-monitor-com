@@ -46,7 +46,11 @@ const effects = {
               return HOME_ACCOUNT.path;
             }
           case 5:
-            return HOME_MONITOR.path;
+            if (res.userInfo.password === md5('123456')) {
+              return HOME_PASSWORD.path;
+            } else {
+              return HOME_MONITOR.path;
+            }
           default:
             return HOME_INDEX.path;
         }

@@ -16,6 +16,12 @@ export const GET_ALL_USERS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_USER
 export const CREATE_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/createAccount`;
 export const UPDATE_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/updateAccount`;
 export const SELECT_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/selectAccount`;
+export const DELETE_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/deleteAccount`;
+
+// 监测员
+export const SELECT_BLACK_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/selectBlackList`;
+export const SAVE_BLACK_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/saveBlackList`;
+export const OCR_TEST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/ocrTest`;
 
 // export const QUARY_DEPARTMENT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/quaryDepartment`;
 // export const SAVE_DEPARTMENT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADMIN}/saveDepartment`;

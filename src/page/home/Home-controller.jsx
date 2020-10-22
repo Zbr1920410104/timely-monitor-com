@@ -14,6 +14,7 @@ import PasswordModifyController from '@/page/home/admin/Password-modify-controll
 import HomeAccountController from '@/page/home/admin/Home-account-controller.jsx';
 import HomeMonitorController from '@/page/home/monitor/Home-monitor-controller.jsx';
 import HomeMonitorListController from '@/page/home/monitor/Home-monitor-list-controller.jsx';
+import HomeMonitorTextController from '@/page/home/monitor/Home-monitor-text-controller.jsx';
 
 // localStorage
 import { LOCAL_STORAGE } from '@/constants/app-constants';
@@ -72,6 +73,10 @@ export default (props) => {
     path: ROUTES.HOME_MONITOR_LIST.path,
     exact: true,
   });
+  const homeMonitorText = useRouteMatch({
+    path: ROUTES.HOME_MONITOR_TEXT.path,
+    exact: true,
+  });
 
   const roleToText = (role) => {
     switch (role) {
@@ -97,6 +102,8 @@ export default (props) => {
     content = <HomeMonitorController />;
   } else if (homeMonitorList) {
     content = <HomeMonitorListController />;
+  } else if (homeMonitorText) {
+    content = <HomeMonitorTextController />;
   }
 
   return (

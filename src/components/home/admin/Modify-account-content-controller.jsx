@@ -23,9 +23,10 @@ export default (props) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    if (!saveDataLoading) {
+    if (!saveDataLoading && accountUuid) {
       setSaveDataLoading(true);
       // 使用redux-saga
+      values.uuid = accountUuid;
       const res = await proxyFetch(UPDATE_ACCOUNT, values);
       setSaveDataLoading(false);
       if (res) {
@@ -41,7 +42,7 @@ export default (props) => {
       setNeedRefresh(true);
       dispatch(userAction.setAccountRefresh(false));
     }
-  }, [accountRefresh, dispatch, form]);
+  }, [accountRefresh, dispatch]);
 
   // 将已有的数据回显
   useEffect(() => {
@@ -75,8 +76,13 @@ export default (props) => {
           name='role'
           rules={[{ required: true, message: '请选择权限!' }]}
         >
-          <Select placeholder='监测员'>
-            <Option value={5}>监测员</Option>
+          <Select placeholder='选择权限'>
+            <Option value={1} disabled={form.getFieldValue('role') !== 1}>
+              超级管理员
+            </Option>
+            <Option value={5} disabled={form.getFieldValue('role') !== 5}>
+              监测员
+            </Option>
           </Select>
         </Form.Item>
         <Form.Item

@@ -14,6 +14,7 @@ export const DOMAIN = _DOMAIN[SAP_CONTROL];
 export const PART = {
   OPT_USER: '/user',
   OPT_ADMIN: '/admin',
+  OPT_MONITOR: '/monitor',
 };
 
 // 返回码

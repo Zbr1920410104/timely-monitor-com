@@ -7,7 +7,9 @@ import '../../../style/home/monitor/home-monitor.styl';
 const { RangePicker } = DatePicker;
 
 export default (props) => {
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(true),
+    [value, setValue] = useState(null);
+
   const contentStyle = {
     height: '400px',
     color: '#fff',
@@ -29,20 +31,37 @@ export default (props) => {
     return current && current > moment().endOf('day');
   };
 
-  function disabledRangeTime(_, type) {
-    if (type === 'start') {
+  const disabledDateTime = (dates, partial) => {
+    let hours = moment().hours(); //0~23
+    let minutes = moment().minutes(); //0~59
+    let seconds = moment().seconds(); //0~59
+
+    if (
+      dates &&
+      moment(dates[0]).date() === moment().date() &&
+      partial === 'start'
+    ) {
       return {
-        disabledHours: () => range(0, 60).splice(4, 20),
-        disabledMinutes: () => range(30, 60),
-        disabledSeconds: () => [55, 56],
+        disabledHours: () => range(hours + 1, 24),
+        disabledMinutes: () => range(minutes + 1, 60),
+        disabledSeconds: () => range(seconds + 1, 60),
       };
     }
-    return {
-      disabledHours: () => range(0, 60).splice(20, 4),
-      disabledMinutes: () => range(0, 31),
-      disabledSeconds: () => [55, 56],
-    };
-  }
+
+    //当日只能选择当前时间之后的时间点
+    if (
+      dates &&
+      moment(dates[1]).date() === moment().date() &&
+      partial === 'end'
+    ) {
+      return {
+        disabledHours: () => range(hours + 1, 24),
+        disabledMinutes: () => range(minutes + 1, 60),
+        disabledSeconds: () => range(seconds + 1, 60),
+      };
+    }
+  };
+
   const PICTURE_LIST = [
     { time: '2020-10-19 10:20:09', index: 1 },
     { time: '2020-10-19 11:20:09', index: 2 },
@@ -55,6 +74,10 @@ export default (props) => {
     { time: '2020-10-19 18:20:09', index: 9 },
     { time: '2020-10-19 19:20:09', index: 10 },
   ];
+
+  const changeTime = (time) => {
+    setValue(time);
+  };
 
   return (
     <div className='home-monitor-box'>
@@ -74,16 +97,17 @@ export default (props) => {
         <div className='select-text-box'>时间选择：</div>
         <RangePicker
           disabledDate={disabledDate}
-          disabledTime={disabledRangeTime}
+          disabledTime={disabledDateTime}
           showTime={{
             hideDisabledOptions: true,
-            defaultValue: [
-              moment('00:00:00', 'HH:mm:ss'),
-              moment('11:59:59', 'HH:mm:ss'),
-            ],
+            defaultValue: [moment('00:00', 'HH:mm'), moment('11:59', 'HH:mm')],
           }}
-          format='YYYY-MM-DD HH:mm:ss'
+          format='YYYY-MM-DD HH:mm'
           disabled={isOpened}
+          value={value}
+          onChange={(e) => {
+            changeTime(e);
+          }}
         />
         <Button
           className={isOpened ? 'fail-button' : 'confirm-button'}

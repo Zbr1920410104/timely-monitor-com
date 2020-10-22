@@ -21,3 +21,7 @@ export const HOME_MONITOR_LIST = {
   path: '/home/monitorList',
   name: '监测员监测列表页面',
 };
+export const HOME_MONITOR_TEXT = {
+  path: '/home/monitorText',
+  name: '监测员黑名单页面',
+};

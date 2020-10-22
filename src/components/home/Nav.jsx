@@ -19,6 +19,7 @@ import {
   TeamOutlined,
   MonitorOutlined,
   BarsOutlined,
+  ProfileOutlined,
 } from '@ant-design/icons';
 
 export default (props) => {
@@ -48,6 +49,8 @@ export default (props) => {
         return <MonitorOutlined />;
       case 'bars':
         return <BarsOutlined />;
+      case 'profile':
+        return <ProfileOutlined />;
       default:
         return;
     }

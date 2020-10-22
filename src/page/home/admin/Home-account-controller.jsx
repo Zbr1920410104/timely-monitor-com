@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 // 请求
 import proxyFetch from '@/util/request';
-import { GET_ALL_USERS } from '@/constants/api-constants';
+import { GET_ALL_USERS, DELETE_ACCOUNT } from '@/constants/api-constants';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import userAction from '@/redux/action/user';
 
 // 组件
@@ -19,7 +19,8 @@ const { Column } = Table,
   { confirm } = Modal;
 
 export default (porps) => {
-  const [accountLoading, setAccountLoading] = useState(false),
+  const { changeAccount } = useSelector((state) => state.userStore),
+    [accountLoading, setAccountLoading] = useState(false),
     [accountList, setAccountList] = useState([]),
     [isNeedRefresh, setIsNeedRefresh] = useState(true),
     [newAccountVisible, setNewAccountVisible] = useState(false),
@@ -45,23 +46,39 @@ export default (porps) => {
     })();
   }, [isNeedRefresh]);
 
+  useEffect(() => {
+    if (changeAccount) {
+      dispatch(userAction.setChangeAccount(false));
+      setIsNeedRefresh(true);
+      setNewAccountVisible(false);
+      setModifyAccountVisible(false);
+    }
+  }, [changeAccount, dispatch]);
+
   const showNewAccountModal = () => {
     setNewAccountVisible(true);
   };
 
   const hideNewAccountModal = () => {
-    dispatch(userAction.setAccountRefresh(true));
     setNewAccountVisible(false);
   };
 
   const showModifyAccountModal = (uuid) => {
     dispatch(userAction.setAccountUuid(uuid));
+    dispatch(userAction.setAccountRefresh(true));
     setModifyAccountVisible(true);
   };
 
   const hideModifyAccountModal = () => {
     dispatch(userAction.setAccountUuid(''));
     setModifyAccountVisible(false);
+  };
+
+  const handleDelete = async (uuid) => {
+    const res = await proxyFetch(DELETE_ACCOUNT, { uuid }, 'POST');
+    if (res) {
+      dispatch(userAction.setChangeAccount(true));
+    }
   };
 
   return (
@@ -166,8 +183,27 @@ export default (porps) => {
             title='删除账户'
             dataIndex=''
             key=''
-            render={() => {
-              return <Button type='link'>删除账户</Button>;
+            render={(text, record) => {
+              return (
+                <Button
+                  type='link'
+                  onClick={() => {
+                    confirm({
+                      title: '删除用户?',
+                      okType: 'primary',
+                      content: '确认要删除用户?',
+                      okText: '确认',
+                      cancelText: '取消',
+                      onOk() {
+                        handleDelete(record.uuid);
+                      },
+                      onCancel() {},
+                    });
+                  }}
+                >
+                  删除账户
+                </Button>
+              );
             }}
           />
         </Table>

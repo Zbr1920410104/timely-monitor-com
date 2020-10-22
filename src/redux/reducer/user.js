@@ -55,6 +55,12 @@ export default handleActions(
         accountRefresh: result,
       };
     },
+    setBlackListRefresh(state, { payload: result }) {
+      return {
+        ...state,
+        blackListRefresh: result,
+      };
+    },
   },
   {
     loginLoading: false,
@@ -63,6 +69,7 @@ export default handleActions(
     addAccount: false,
     accountRefresh: false,
     changeAccount: false,
+    blackListRefresh: false,
     addUuid: '',
     uuid: '',
     userName: '',
