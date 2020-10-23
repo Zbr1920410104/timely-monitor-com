@@ -1,77 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // 请求
 import proxyFetch from '@/util/request';
-import { OCR_TEST } from '@/constants/api-constants';
+import {
+  OCR_TEST,
+  GET_MONITOR_LIST,
+  GET_FILE_URL,
+} from '@/constants/api-constants';
+
+// redux
+// import { useDispatch, useSelector } from 'react-redux';
+// import userAction from '@/redux/action/user';
 
 import { Table, Button } from 'antd';
 import '../../../style/home/monitor/monitor-list.styl';
 const { Column } = Table;
 
 export default (props) => {
+  const [monitorLoading, setMonitorLoading] = useState(false),
+    [monitorList, setMonitorList] = useState([]);
   const clickToTest = async () => {
-    const res = await proxyFetch(OCR_TEST);
-    console.log('====================================');
-    console.log(res);
-    console.log('====================================');
+    await proxyFetch(OCR_TEST);
   };
-  const accountList = [
-    {
-      uuid: '1213241',
-      time: '2020-10-19 10:20:00',
-      isViolate: null,
-      originUrl: '',
-      newUrl: '',
-    },
-    {
-      uuid: '1213242',
-      time: '2020-10-19 11:20:00',
-      isViolate: 1,
-      originUrl: '',
-      newUrl: '',
-    },
-    {
-      uuid: '1213243',
-      time: '2020-10-19 12:20:00',
-      isViolate: 0,
-      originUrl: '',
-      newUrl: '',
-    },
-    {
-      uuid: '1213244',
-      time: '2020-10-19 13:20:00',
-      isViolate: 1,
-      originUrl: '',
-      newUrl: '',
-    },
-    {
-      uuid: '1213245',
-      time: '2020-10-19 14:20:00',
-      isViolate: 0,
-      originUrl: '',
-      newUrl: '',
-    },
-  ];
+
+  // 将已有的数据回显
+  useEffect(() => {
+    (async () => {
+      setMonitorLoading(true);
+      const res = await proxyFetch(GET_MONITOR_LIST, {}, 'GET');
+      if (res) {
+        setMonitorList(res);
+      }
+      setMonitorLoading(false);
+    })();
+  }, []);
+
+  const getFileUrl = async (url) => {
+    const res = await proxyFetch(GET_FILE_URL, { url }, 'GET');
+    window.open(res);
+  };
+
   return (
     <div className='home-monitor-list-box'>
       <p className='title-box'>
         <span>监控列表</span>
       </p>
+      <div className='button-box'>
+        <Button
+          className='button'
+          size='large'
+          type='primary'
+          onClick={clickToTest}
+        >
+          开始检测
+        </Button>
+      </div>
       <Table
-        dataSource={accountList}
+        dataSource={monitorList}
         className='table'
-        // loading={accountLoading}
+        loading={monitorLoading}
         rowKey={(record) => record.uuid}
         scroll={{ x: 900 }}
-        // expandedRowRender={expandedRowRender}
       >
-        <Column
-          align='center'
-          title='时间'
-          dataIndex='time'
-          key=''
-          // fixed='left'
-        />
+        <Column align='center' title='时间' dataIndex='time' key='' />
         <Column
           align='center'
           title='是否存在黑名单关键词'
@@ -90,9 +81,14 @@ export default (props) => {
           title='查看原图'
           dataIndex='originUrl'
           key=''
-          render={() => {
+          render={(text, record) => {
             return (
-              <Button type='link' onClick={clickToTest}>
+              <Button
+                type='link'
+                onClick={() => {
+                  getFileUrl(text);
+                }}
+              >
                 查看原图
               </Button>
             );
@@ -103,8 +99,17 @@ export default (props) => {
           title='查看监测图片'
           dataIndex='newUrl'
           key=''
-          render={() => {
-            return <Button type='link'>查看监测图片</Button>;
+          render={(text, record) => {
+            return (
+              <Button
+                type='link'
+                onClick={() => {
+                  getFileUrl(text);
+                }}
+              >
+                查看监测图片
+              </Button>
+            );
           }}
         />
       </Table>
