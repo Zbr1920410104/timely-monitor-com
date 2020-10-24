@@ -67,7 +67,7 @@ export default (props) => {
     <div className='black-list-modal-box'>
       <Alert
         message='填写须知'
-        description='请以英文分号";"分隔每个黑名单'
+        description='请以英文分号";"分隔每个黑名单,不建议使用英文单词或字母作为黑名单关键词'
         className='alert-box'
         type='info'
         showIcon

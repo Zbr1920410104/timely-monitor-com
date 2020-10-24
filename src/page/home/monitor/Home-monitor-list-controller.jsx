@@ -12,28 +12,38 @@ import {
 // import { useDispatch, useSelector } from 'react-redux';
 // import userAction from '@/redux/action/user';
 
-import { Table, Button } from 'antd';
+import { Table, Button, Select } from 'antd';
 import '../../../style/home/monitor/monitor-list.styl';
-const { Column } = Table;
+const { Column } = Table,
+  { Option } = Select;
 
 export default (props) => {
   const [monitorLoading, setMonitorLoading] = useState(false),
-    [monitorList, setMonitorList] = useState([]);
+    [monitorList, setMonitorList] = useState([]),
+    [isNeedRefresh, setIsNeedRefresh] = useState(true),
+    [monitorNumber, setMonitorNumber] = useState(1);
   const clickToTest = async () => {
-    await proxyFetch(OCR_TEST);
+    await proxyFetch(OCR_TEST, { monitorNumber });
+    setMonitorLoading(true);
+    setTimeout(() => {
+      setIsNeedRefresh(true);
+    }, 5000 * monitorNumber);
   };
 
   // 将已有的数据回显
   useEffect(() => {
-    (async () => {
-      setMonitorLoading(true);
-      const res = await proxyFetch(GET_MONITOR_LIST, {}, 'GET');
-      if (res) {
-        setMonitorList(res);
-      }
-      setMonitorLoading(false);
-    })();
-  }, []);
+    if (isNeedRefresh) {
+      (async () => {
+        setMonitorLoading(true);
+        const res = await proxyFetch(GET_MONITOR_LIST, {}, 'GET');
+        if (res) {
+          setMonitorList(res);
+        }
+        setMonitorLoading(false);
+      })();
+      setIsNeedRefresh(false);
+    }
+  }, [isNeedRefresh]);
 
   const getFileUrl = async (url) => {
     const res = await proxyFetch(GET_FILE_URL, { url }, 'GET');
@@ -46,13 +56,28 @@ export default (props) => {
         <span>监控列表</span>
       </p>
       <div className='button-box'>
+        <div style={{ paddingRight: '18px', fontSize: '16px', margin: 'auto' }}>
+          请选择监测次数:
+        </div>
+        <Select
+          defaultValue={monitorNumber}
+          onChange={(e) => setMonitorNumber(e)}
+          size='large'
+          className='select'
+        >
+          <Option value={1}>1</Option>
+          <Option value={2}>2</Option>
+          <Option value={3}>3</Option>
+          <Option value={5}>5</Option>
+          <Option value={10}>10</Option>
+        </Select>
         <Button
           className='button'
           size='large'
           type='primary'
           onClick={clickToTest}
         >
-          开始检测
+          开始监测
         </Button>
       </div>
       <Table
