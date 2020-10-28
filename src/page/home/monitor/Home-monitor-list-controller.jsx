@@ -27,7 +27,7 @@ export default (props) => {
     setMonitorLoading(true);
     setTimeout(() => {
       setIsNeedRefresh(true);
-    }, 5000 * monitorNumber);
+    }, 7000 * monitorNumber);
   };
 
   // 将已有的数据回显
