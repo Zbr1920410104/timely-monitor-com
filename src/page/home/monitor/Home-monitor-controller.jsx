@@ -80,37 +80,6 @@ export default (props) => {
     return current && current > moment().endOf('day');
   };
 
-  // const disabledDateTime = (dates, partial) => {
-  //   let hours = moment().hours(); //0~23
-  //   let minutes = moment().minutes(); //0~59
-  //   let seconds = moment().seconds(); //0~59
-
-  //   if (
-  //     dates &&
-  //     moment(dates[0]).date() === moment().date() &&
-  //     partial === 'start'
-  //   ) {
-  //     return {
-  //       disabledHours: () => range(hours + 1, 24),
-  //       disabledMinutes: () => range(minutes + 1, 60),
-  //       disabledSeconds: () => range(seconds + 1, 60),
-  //     };
-  //   }
-
-  //   //当日只能选择当前时间之后的时间点
-  //   if (
-  //     dates &&
-  //     moment(dates[1]).date() === moment().date() &&
-  //     partial === 'end'
-  //   ) {
-  //     return {
-  //       disabledHours: () => range(hours + 1, 24),
-  //       disabledMinutes: () => range(minutes + 1, 60),
-  //       disabledSeconds: () => range(seconds + 1, 60),
-  //     };
-  //   }
-  // };
-
   const changeTime = (time) => {
     setValue(time);
   };
@@ -162,6 +131,8 @@ export default (props) => {
               return (
                 <div key={picture.uuid}>
                   <h2 className='picture' style={contentStyle(picture.newUrl)}>
+                    {picture.consumerName}
+                    {'   '}
                     {picture.time}
                   </h2>
                 </div>

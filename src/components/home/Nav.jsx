@@ -74,7 +74,7 @@ export default (props) => {
             <Menu.Item
               key={oneLevelNav.key}
               onClick={() => {
-                if (index > 1 && !navEnabled) {
+                if (index !== 1 && !navEnabled) {
                   message.error('请修改初始密码后再进行操作');
                   history.push(HOME_PASSWORD.path);
                 }

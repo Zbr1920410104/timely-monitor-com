@@ -15,6 +15,8 @@ import HomeAccountController from '@/page/home/admin/Home-account-controller.jsx
 import HomeMonitorController from '@/page/home/monitor/Home-monitor-controller.jsx';
 import HomeMonitorListController from '@/page/home/monitor/Home-monitor-list-controller.jsx';
 import HomeMonitorTextController from '@/page/home/monitor/Home-monitor-text-controller.jsx';
+import HomeConsumerController from '@/page/home/monitor/Home-consumer-controller.jsx';
+import HomeConsumerWelcomeController from '@/page/home/consumer/Home-consumer-welcome-controller.jsx';
 
 // localStorage
 import { LOCAL_STORAGE } from '@/constants/app-constants';
@@ -77,6 +79,14 @@ export default (props) => {
     path: ROUTES.HOME_MONITOR_TEXT.path,
     exact: true,
   });
+  const homeConsumerList = useRouteMatch({
+    path: ROUTES.HOME_CONSUMER_LIST.path,
+    exact: true,
+  });
+  const homeConsumerWelcome = useRouteMatch({
+    path: ROUTES.HOME_CONSUMER_WELCOME.path,
+    exact: true,
+  });
 
   const roleToText = (role) => {
     switch (role) {
@@ -84,6 +94,8 @@ export default (props) => {
         return '超级管理员';
       case 5:
         return '监测员';
+      case 10:
+        return '普通用户';
       default:
         return '未知';
     }
@@ -104,6 +116,10 @@ export default (props) => {
     content = <HomeMonitorListController />;
   } else if (homeMonitorText) {
     content = <HomeMonitorTextController />;
+  } else if (homeConsumerList) {
+    content = <HomeConsumerController />;
+  } else if (homeConsumerWelcome) {
+    content = <HomeConsumerWelcomeController />;
   }
 
   return (

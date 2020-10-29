@@ -25,3 +25,11 @@ export const HOME_MONITOR_TEXT = {
   path: '/home/monitorText',
   name: '监测员黑名单页面',
 };
+export const HOME_CONSUMER_LIST = {
+  path: '/home/consumerList',
+  name: '监测员账户管理页面',
+};
+export const HOME_CONSUMER_WELCOME = {
+  path: '/home/consumerWelcome',
+  name: '普通用户欢迎页面',
+};

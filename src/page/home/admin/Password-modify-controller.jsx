@@ -1,7 +1,12 @@
 import React from 'react';
 
 // 路由
-import { HOME_MONITOR, INDEX } from '@/constants/route-constants';
+import {
+  HOME_MONITOR,
+  INDEX,
+  HOME_ACCOUNT,
+  HOME_CONSUMER_WELCOME,
+} from '@/constants/route-constants';
 import { useHistory } from 'react-router-dom';
 
 // 请求
@@ -24,7 +29,7 @@ import '@/style/home/public/password-modify.styl';
 
 export default (props) => {
   const [form] = Form.useForm();
-  const { userName } = useSelector((state) => state.userStore);
+  const { userName, role } = useSelector((state) => state.userStore);
   const token = localStorage.getItem(`${LOCAL_STORAGE}-token`),
     history = useHistory(),
     dispatch = useDispatch();
@@ -46,7 +51,13 @@ export default (props) => {
       if (userName && values.password) {
         dispatch(userAction.asyncSetUser(values));
       }
-      history.push(HOME_MONITOR.path);
+      if (role === 1) {
+        history.push(HOME_ACCOUNT.path);
+      } else if (role === 5) {
+        history.push(HOME_MONITOR.path);
+      } else {
+        history.push(HOME_CONSUMER_WELCOME.path);
+      }
     }
   };
 

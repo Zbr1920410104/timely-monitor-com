@@ -15,6 +15,7 @@ export const PART = {
   OPT_USER: '/user',
   OPT_ADMIN: '/admin',
   OPT_MONITOR: '/monitor',
+  OPT_CONSUMER: '/consumer',
 };
 
 // 返回码

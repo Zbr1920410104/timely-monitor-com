@@ -21,7 +21,14 @@ export const DELETE_ACCOUNT = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_ADM
 // 监测员
 export const SELECT_BLACK_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/selectBlackList`;
 export const SAVE_BLACK_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/saveBlackList`;
-export const OCR_TEST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/ocrTest`;
 export const GET_MONITOR_LIST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/getMonitorList`;
 export const GET_FILE_URL = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/getFileUrl`;
 export const GET_PICTURE = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/getPicture`;
+export const GET_ALL_CONSUMERS = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/getAllConsumer`;
+export const CREATE_CONSUMER = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/createConsumer`;
+export const UPDATE_CONSUMER = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/updateConsumer`;
+export const SELECT_CONSUMER = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/selectConsumer`;
+export const DELETE_CONSUMER = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_MONITOR}/deleteConsumer`;
+
+// 普通员工
+export const OCR_TEST = `${DominConfigs.DOMAIN}${DominConfigs.PART.OPT_CONSUMER}/ocrTest`;

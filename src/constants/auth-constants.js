@@ -5,8 +5,12 @@ export const AUTHORITY = {
     code: 1,
   },
   MONITOR: {
-    name: '普通节点',
+    name: '监测员',
     code: 5,
+  },
+  CONSUMER: {
+    name: '普通用户',
+    code: 10,
   },
 };
 

@@ -19,6 +19,7 @@ import {
   INDEX,
   HOME_ACCOUNT,
   HOME_MONITOR,
+  HOME_CONSUMER_WELCOME,
 } from '@/constants/route-constants';
 import md5 from 'md5';
 
@@ -50,6 +51,12 @@ const effects = {
               return HOME_PASSWORD.path;
             } else {
               return HOME_MONITOR.path;
+            }
+          case 10:
+            if (res.userInfo.password === md5('123456')) {
+              return HOME_PASSWORD.path;
+            } else {
+              return HOME_CONSUMER_WELCOME.path;
             }
           default:
             return HOME_INDEX.path;

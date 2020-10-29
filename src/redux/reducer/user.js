@@ -10,6 +10,7 @@ export default handleActions(
         role: result.role,
         uuid: result.uuid,
         password: result.password,
+        monitorUuid: result.monitorUuid,
       };
     },
     // 设置登录loading
@@ -55,6 +56,30 @@ export default handleActions(
         accountRefresh: result,
       };
     },
+    setAddConsumer(state, { payload: result }) {
+      return {
+        ...state,
+        addConsumer: result,
+      };
+    },
+    setChangeConsumer(state, { payload: result }) {
+      return {
+        ...state,
+        changeConsumer: result,
+      };
+    },
+    setConsumerUuid(state, { payload: result }) {
+      return {
+        ...state,
+        consumerUuid: result,
+      };
+    },
+    setConsumerRefresh(state, { payload: result }) {
+      return {
+        ...state,
+        consumerRefresh: result,
+      };
+    },
     setBlackListRefresh(state, { payload: result }) {
       return {
         ...state,
@@ -69,7 +94,13 @@ export default handleActions(
     addAccount: false,
     accountRefresh: false,
     changeAccount: false,
+    addConsumer: false,
+    consumerRefresh: false,
+    changeConsumer: false,
     blackListRefresh: false,
+    monitorUuid: '',
+    accountUuid: '',
+    consumerUuid: '',
     addUuid: '',
     uuid: '',
     userName: '',

@@ -11,6 +11,10 @@ export default {
   setChangeAccount: createAction('setChangeAccount'),
   setAccountUuid: createAction('setAccountUuid'),
   setAccountRefresh: createAction('setAccountRefresh'),
+  setAddConsumer: createAction('setAddConsumer'),
+  setChangeConsumer: createAction('setChangeConsumer'),
+  setConsumerUuid: createAction('setConsumerUuid'),
+  setConsumerRefresh: createAction('setConsumerRefresh'),
   setBlackListRefresh: createAction('setBlackListRefresh'),
   // 普通员工填写
 };
