@@ -15,7 +15,7 @@ export default (props) => {
         t;
       const screenshots = async () => {
         num++;
-        if (num % 6 === 0) {
+        if (num % 4 === 0) {
           return;
         }
         setRes(await proxyFetch(OCR_TEST));
@@ -29,11 +29,16 @@ export default (props) => {
     })();
   }, []);
 
-  console.log('res=', res);
   return (
     <div className='home-consumer-welcome-box'>
       {res ? (
-        <audio src='/mp3/warning.mp3' autoPlay>
+        <audio
+          src='/mp3/warning.mp3'
+          onEnded={() => {
+            setRes('');
+          }}
+          autoPlay
+        >
           <track src='/mp3/warning.mp3' kind='captions' />
         </audio>
       ) : null}
