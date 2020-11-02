@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 
 // redux
 import userAction from '@/redux/action/user';
@@ -9,14 +9,14 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import * as ROUTES from '@/constants/route-constants';
 
 // controller
-import HomeIndexController from '@/page/home/Home-index-controller.jsx';
-import PasswordModifyController from '@/page/home/admin/Password-modify-controller.jsx';
-import HomeAccountController from '@/page/home/admin/Home-account-controller.jsx';
-import HomeMonitorController from '@/page/home/monitor/Home-monitor-controller.jsx';
-import HomeMonitorListController from '@/page/home/monitor/Home-monitor-list-controller.jsx';
-import HomeMonitorTextController from '@/page/home/monitor/Home-monitor-text-controller.jsx';
-import HomeConsumerController from '@/page/home/monitor/Home-consumer-controller.jsx';
-import HomeConsumerWelcomeController from '@/page/home/consumer/Home-consumer-welcome-controller.jsx';
+// import HomeIndexController from '@/page/home/Home-index-controller.jsx';
+// import PasswordModifyController from '@/page/home/admin/Password-modify-controller.jsx';
+// import HomeAccountController from '@/page/home/admin/Home-account-controller.jsx';
+// import HomeMonitorController from '@/page/home/monitor/Home-monitor-controller.jsx';
+// import HomeMonitorListController from '@/page/home/monitor/Home-monitor-list-controller.jsx';
+// import HomeMonitorTextController from '@/page/home/monitor/Home-monitor-text-controller.jsx';
+// import HomeConsumerController from '@/page/home/monitor/Home-consumer-controller.jsx';
+// import HomeConsumerWelcomeController from '@/page/home/consumer/Home-consumer-welcome-controller.jsx';
 
 // localStorage
 import { LOCAL_STORAGE } from '@/constants/app-constants';
@@ -26,8 +26,33 @@ import Nav from '@/components/home/Nav.jsx';
 
 // 样式
 import '@/style/home/home.styl';
-import { Layout, Icon, Button } from 'antd';
+import { Layout, Icon, Button, Empty } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
+
+const HomeConsumerWelcomeController = lazy(() =>
+  import('@/page/home/consumer/Home-consumer-welcome-controller.jsx')
+);
+const PasswordModifyController = lazy(() =>
+  import('@/page/home/admin/Password-modify-controller.jsx')
+);
+const HomeIndexController = lazy(() =>
+  import('@/page/home/Home-index-controller.jsx')
+);
+const HomeAccountController = lazy(() =>
+  import('@/page/home/admin/Home-account-controller.jsx')
+);
+const HomeMonitorController = lazy(() =>
+  import('@/page/home/monitor/Home-monitor-controller.jsx')
+);
+const HomeMonitorListController = lazy(() =>
+  import('@/page/home/monitor/Home-monitor-list-controller.jsx')
+);
+const HomeMonitorTextController = lazy(() =>
+  import('@/page/home/monitor/Home-monitor-text-controller.jsx')
+);
+const HomeConsumerController = lazy(() =>
+  import('@/page/home/monitor/Home-consumer-controller.jsx')
+);
 
 export default (props) => {
   const token = localStorage.getItem(`${LOCAL_STORAGE}-token`);
@@ -152,7 +177,17 @@ export default (props) => {
           </div>
         </Header>
         <Content className='content-box'>
-          <div className='content-inner-box'>{content}</div>
+          <div className='content-inner-box'>
+            <Suspense
+              fallback={
+                <div>
+                  <Empty />
+                </div>
+              }
+            >
+              {content}
+            </Suspense>
+          </div>
         </Content>
         <Footer className='home-footer'>
           Ant Design ©2018 Created by Ant UED
