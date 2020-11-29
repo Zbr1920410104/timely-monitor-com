@@ -50,7 +50,7 @@ export default (props) => {
     let imageUrl = 'http://timely-monitor.oss-cn-beijing.aliyuncs.com/' + url;
     if (!url) {
       return {
-        height: '480px',
+        height: '600px',
         color: 'red',
         lineHeight: '20px',
         textAlign: 'left',
@@ -58,7 +58,7 @@ export default (props) => {
       };
     }
     return {
-      height: '480px',
+      height: '600px',
       color: 'red',
       lineHeight: '20px',
       textAlign: 'left',

@@ -15,7 +15,7 @@ export default (props) => {
         t;
       const screenshots = async () => {
         num++;
-        if (num % 4 === 0) {
+        if (num % 6 === 0) {
           return;
         }
         setRes(await proxyFetch(OCR_TEST));
