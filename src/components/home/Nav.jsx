@@ -24,8 +24,8 @@ import {
 
 export default (props) => {
   const { role, userLoading, password } = useSelector(
-      (state) => state.userStore
-    ),
+    (state) => state.userStore
+  ),
     history = useHistory(),
     [navEnabled, setNavEnabled] = useState(true);
 
@@ -68,7 +68,7 @@ export default (props) => {
         />
       }
     >
-      <Menu theme='dark' mode='inline'>
+      <Menu mode='inline'>
         {NAV[role] ? (
           NAV[role].map((oneLevelNav, index) => (
             <Menu.Item
@@ -87,8 +87,8 @@ export default (props) => {
             </Menu.Item>
           ))
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
       </Menu>
     </Spin>
   );

@@ -15,7 +15,7 @@ export default (props) => {
         t;
       const screenshots = async () => {
         num++;
-        if (num % 6 === 0) {
+        if (num % 4 === 0) {
           return;
         }
         setRes(await proxyFetch(OCR_TEST));
@@ -42,7 +42,7 @@ export default (props) => {
           <track src='/mp3/warning.mp3' kind='captions' />
         </audio>
       ) : null}
-      <img src='/image/monitor.jpg' alt='监控图片' className='home-index-img' />
+      <img src='/image/home.jpg' alt='监控图片' className='home-index-img' />
     </div>
   );
 };

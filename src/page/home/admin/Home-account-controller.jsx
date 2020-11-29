@@ -14,7 +14,7 @@ import CreateAccountContent from '@/components/home/admin/Create-account-content
 
 // 样式
 import '@/style/home/admin/home-account.styl';
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Tag } from 'antd';
 const { Column } = Table,
   { confirm } = Modal;
 
@@ -100,7 +100,7 @@ export default (porps) => {
               onOk() {
                 hideNewAccountModal();
               },
-              onCancel() {},
+              onCancel() { },
             });
           }}
           footer={null}
@@ -123,7 +123,7 @@ export default (porps) => {
               onOk() {
                 hideModifyAccountModal();
               },
-              onCancel() {},
+              onCancel() { },
             });
           }}
           okText='确定'
@@ -156,7 +156,7 @@ export default (porps) => {
             key=''
             fixed='left'
             render={(text) => {
-              return text === 1 ? '超级管理员' : '监测员';
+              return text === 1 ? <Tag color='red' >超级管理员</Tag> : <Tag color='purple' >监测员</Tag>;
             }}
           />
           <Column align='center' title='账户' dataIndex='userName' key='' />
@@ -197,7 +197,7 @@ export default (porps) => {
                       onOk() {
                         handleDelete(record.uuid);
                       },
-                      onCancel() {},
+                      onCancel() { },
                     });
                   }}
                 >

@@ -89,7 +89,7 @@ export default (props) => {
                 },
               ]}
             >
-              <Input.Password placeholder='请输入原密码' />
+              <Input.Password placeholder='请输入原密码' className='input'/>
             </Form.Item>
             <Form.Item
               label='新密码'
@@ -106,7 +106,7 @@ export default (props) => {
                 },
               ]}
             >
-              <Input.Password placeholder='请输入新密码' />
+              <Input.Password placeholder='请输入新密码' className='input'/>
             </Form.Item>
             <Form.Item
               label='确认新密码'
@@ -133,7 +133,7 @@ export default (props) => {
                 },
               ]}
             >
-              <Input.Password placeholder='请再次输入新密码' />
+              <Input.Password placeholder='请再次输入新密码' className='input'/>
             </Form.Item>
 
             {/* 保存按钮 */}
@@ -148,14 +148,6 @@ export default (props) => {
               </Button>
             </Form.Item>
           </Form>
-        </div>
-        <div className='content-right-box'>
-          <Alert
-            message='密码修改注意事项'
-            description='用户首次登陆时,为保证账户安全使用,须修改原始密码,方可开始填写,如忘记密码,可联系超级管理员重置为初始密码'
-            type='info'
-            showIcon
-          />
         </div>
       </div>
     </div>

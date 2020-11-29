@@ -26,7 +26,8 @@ import Nav from '@/components/home/Nav.jsx';
 
 // 样式
 import '@/style/home/home.styl';
-import { Layout, Icon, Button, Empty } from 'antd';
+import { EyeFilled } from '@ant-design/icons';
+import { Layout, Button, Empty } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
 const HomeConsumerWelcomeController = lazy(() =>
@@ -149,10 +150,10 @@ export default (props) => {
 
   return (
     <Layout>
-      <Sider className='home-sider'>
+      <Sider className='home-sider' theme='light'>
         <div className='logo'>
-          <Icon type='reconciliation' />
-          <span>OCR实时监测系统</span>
+          <EyeFilled />
+          <span>屏幕监测管理平台</span>
         </div>
         <div className='user-info'>
           <span>
@@ -163,6 +164,7 @@ export default (props) => {
       </Sider>
       <Layout className='home-content'>
         <Header className='home-header'>
+          欢迎使用屏幕监测管理平台
           <div className='exit-box'>
             <Button
               type='link'

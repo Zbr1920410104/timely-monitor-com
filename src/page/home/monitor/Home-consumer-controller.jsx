@@ -14,7 +14,7 @@ import CreateConsumerContent from '@/components/home/monitor/Create-consumer-con
 
 // 样式
 import '@/style/home/monitor/home-consumer.styl';
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Tag } from 'antd';
 const { Column } = Table,
   { confirm } = Modal;
 
@@ -100,7 +100,7 @@ export default (porps) => {
               onOk() {
                 hideNewConsumerModal();
               },
-              onCancel() {},
+              onCancel() { },
             });
           }}
           footer={null}
@@ -123,7 +123,7 @@ export default (porps) => {
               onOk() {
                 hideModifyConsumerModal();
               },
-              onCancel() {},
+              onCancel() { },
             });
           }}
           okText='确定'
@@ -156,7 +156,7 @@ export default (porps) => {
             key=''
             fixed='left'
             render={(text) => {
-              return text === 10 ? '普通用户' : '未知';
+              return text === 10 ? <Tag color='blue' >普通用户</Tag> : '未知';
             }}
           />
           <Column align='center' title='账户' dataIndex='userName' key='' />
@@ -197,7 +197,7 @@ export default (porps) => {
                       onOk() {
                         handleDelete(record.uuid);
                       },
-                      onCancel() {},
+                      onCancel() { },
                     });
                   }}
                 >

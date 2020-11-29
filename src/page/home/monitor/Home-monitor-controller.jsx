@@ -1,53 +1,38 @@
 import React, { useState, useEffect } from 'react';
 
-import moment from 'moment';
-
 // 请求
 import proxyFetch from '@/util/request';
 import { GET_PICTURE } from '@/constants/api-constants';
 
-import { Carousel, Switch, DatePicker, Skeleton } from 'antd';
+import { Carousel, Skeleton } from 'antd';
 import '../../../style/home/monitor/home-monitor.styl';
-const { RangePicker } = DatePicker;
 
 export default (props) => {
-  const [isOpened, setIsOpened] = useState(true),
-    [needRefresh, setNeedRefresh] = useState(true),
+  const [needRefresh, setNeedRefresh] = useState(true),
     [pictureList, setPictureList] = useState([]),
-    [loading, setLoading] = useState(false),
-    [value, setValue] = useState(null);
+    [loading, setLoading] = useState(false);
 
   // 将已有的数据回显
   useEffect(() => {
     if (needRefresh) {
       (async () => {
         setLoading(true);
-        let timeData = {};
-        if (value) {
-          timeData.foreTime = value[0].format('YYYY-MM-DD HH:mm:ss');
-          timeData.laterTime = value[1].format('YYYY-MM-DD HH:mm:ss');
-        }
         const res = await proxyFetch(
           GET_PICTURE,
           {
-            isOpened,
-            foreTime: timeData?.foreTime,
-            laterTime: timeData?.laterTime,
           },
           'GET'
         );
         if (res) {
-          console.log(res);
           setPictureList(res);
         }
         setLoading(false);
       })();
       setNeedRefresh(false);
     }
-  }, [needRefresh, isOpened, value]);
+  }, [needRefresh]);
 
   const contentStyle = (url) => {
-    let imageUrl = 'http://timely-monitor.oss-cn-beijing.aliyuncs.com/' + url;
     if (!url) {
       return {
         height: '600px',
@@ -56,15 +41,17 @@ export default (props) => {
         textAlign: 'left',
         background: '#364d79',
       };
+    } else {
+      // newUrl = 'D:/VScodeProject/class-project/timely-monitor-group9/timely-monitor-server/src/tests/014bcab0-3232-11eb-a189-0dd5cd450b61.png'
+      return {
+        height: '600px',
+        color: '#1d39c4',
+        lineHeight: '20px',
+        textAlign: 'left',
+        backgroundImage: `url(/images/${url})`,
+        backgroundSize: '100% 100%',
+      };
     }
-    return {
-      height: '600px',
-      color: 'red',
-      lineHeight: '20px',
-      textAlign: 'left',
-      backgroundImage: `url(${imageUrl})`,
-      backgroundSize: '100% 100%',
-    };
   };
 
   // const range = (start, end) => {
@@ -74,22 +61,12 @@ export default (props) => {
   //   }
   //   return result;
   // };
-
-  const disabledDate = (current) => {
-    // 无法选择之后的日期
-    return current && current > moment().endOf('day');
-  };
-
-  const changeTime = (time) => {
-    setValue(time);
-  };
-
   return (
     <div className='home-monitor-box'>
       <p className='title-box'>
         <span>图片监控</span>
       </p>
-      <div className='time-switch-box'>
+      {/* <div className='time-switch-box'>
         <div className='switch-text-box'>展示最新10张监控图片 </div>
         <Switch
           defaultChecked
@@ -98,9 +75,9 @@ export default (props) => {
             setNeedRefresh(true);
           }}
         />
-      </div>
+      </div> */}
       <div className='time-select-box'>
-        <div className='select-text-box'>时间选择：</div>
+        {/* <div className='select-text-box'>时间选择：</div>
         <RangePicker
           disabledDate={disabledDate}
           // disabledTime={disabledDateTime}
@@ -115,7 +92,7 @@ export default (props) => {
             changeTime(e);
             setNeedRefresh(true);
           }}
-        />
+        /> */}
         {/* <Button
           className={isOpened ? 'fail-button' : 'confirm-button'}
           type='primary'
@@ -139,12 +116,12 @@ export default (props) => {
               );
             })
           ) : (
-            <div>
-              <h2 className='picture' style={contentStyle('')}>
-                图片待获取
+              <div>
+                <h2 className='picture' style={contentStyle('')}>
+                  图片待获取
               </h2>
-            </div>
-          )}
+              </div>
+            )}
         </Carousel>
       </Skeleton>
     </div>

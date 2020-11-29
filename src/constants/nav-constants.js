@@ -40,13 +40,13 @@ export const NAV = {
     {
       key: 'monitor',
       path: ROUTE.HOME_MONITOR.path,
-      name: '图片监控',
+      name: '图片演示',
       icon: 'monitor',
     },
     {
       key: 'monitorList',
       path: ROUTE.HOME_MONITOR_LIST.path,
-      name: '监控列表',
+      name: '图片浏览',
       icon: 'bars',
     },
     {
